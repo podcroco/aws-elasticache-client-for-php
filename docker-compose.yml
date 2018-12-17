@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+
+  build-aws-elasticache-client:
+    build:
+        context: .
+        dockerfile: Dockerfile
+
+    volumes:
+      - ${PWD}/build:/build
+
+    command:
+      /bin/bash /tmp/build.sh
+      
