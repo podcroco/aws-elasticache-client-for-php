@@ -2,7 +2,7 @@ version: '2'
 
 services:
 
-  build-aws-elasticache-client:
+  build-aws-elasticache-client-7.2:
     build:
         context: .
         dockerfile: Dockerfile

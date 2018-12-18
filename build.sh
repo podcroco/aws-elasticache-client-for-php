@@ -17,7 +17,7 @@ cd aws-elasticache-cluster-client-memcached-for-php
 git checkout php7
 phpize
 ./configure --with-libmemcached-dir=/tmp/libmemcached --enable-memcached-igbinary --enable-memcached-json --enable-memcached-msgpack --disable-memcached-sasl
-patch -p1 < /tmp/php73.patch
+
 sed -i "s#-lmemcached#/tmp/libmemcached/lib/libmemcachedutil.a /tmp/libmemcached/lib/libmemcached.a -lcrypt -lpthread -lm -lstdc++#" Makefile
 sed -i "s#-lmemcachedutil##" Makefile
 sed -i "s#-L/tmp/libmemcached/lib##" Makefile
