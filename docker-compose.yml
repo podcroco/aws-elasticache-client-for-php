@@ -8,7 +8,7 @@ services:
         dockerfile: Dockerfile
 
     volumes:
-      - ${PWD}/build:/build
+      - ${PWD}/build-7.2:/build
 
     command:
       /bin/bash /tmp/build.sh
