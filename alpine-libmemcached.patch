@@ -1,0 +1,39 @@
+commit b9411a9cb7bec3e4a135cd40feff760eb5f77fab
+Author: Csaba Hegyi <csaba@intentworks.co.uk>
+Date:   Fri Jul 3 11:25:57 2020 +0200
+
+    Making it compile under Alpine linux
+
+diff --git a/libtest/cmdline.cc b/libtest/cmdline.cc
+index 29a22de..c0cd554 100644
+--- a/libtest/cmdline.cc
++++ b/libtest/cmdline.cc
+@@ -62,7 +62,9 @@ using namespace libtest;
+ #include <stdexcept>
+ 
+ #ifndef __USE_GNU
+-static char **environ= NULL;
++static char **environment = NULL;
++#else
++static char **environment = environ;
+ #endif
+ 
+ #ifndef FD_CLOEXEC
+@@ -248,7 +250,7 @@ Application::error_t Application::run(const char *args[])
+         const_cast<char *>(_exectuble_with_path.c_str()), 
+         0};
+ 
+-      spawn_ret= posix_spawnp(&_pid, libtool(), &file_actions, &spawnattr, argv, environ);
++      spawn_ret= posix_spawnp(&_pid, libtool(), &file_actions, &spawnattr, argv, environment);
+     }
+     else
+     {
+@@ -261,7 +263,7 @@ Application::error_t Application::run(const char *args[])
+         const_cast<char *>(gdb_run_file.c_str()), 
+         const_cast<char *>(_exectuble_with_path.c_str()), 
+         0};
+-      spawn_ret= posix_spawnp(&_pid, "gdb", &file_actions, &spawnattr, argv, environ);
++      spawn_ret= posix_spawnp(&_pid, "gdb", &file_actions, &spawnattr, argv, environment);
+     }
+   }
+   else
