@@ -35,5 +35,6 @@ RUN cd /tmp \
     && sed -i "s#-lmemcachedutil##" Makefile \
     && sed -i "s#-lmemcached#/tmp/libmemcached/lib/libmemcachedutil.a /tmp/libmemcached/lib/libmemcached.a -lcrypt -lpthread -lm -lstdc++#" Makefile \
     && make && make install
-RUN cp /usr/lib/php81/modules/memcached.so /build
+RUN mkdir /build \
+    && cp /usr/lib/php81/modules/memcached.so /build/memcached.so
 
